@@ -1,11 +1,17 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import NotFound from '@/views/NotFound.vue';
 import About from '@/views/About.vue';
+import NotFound from '@/views/NotFound.vue';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 const Books = () => import(/* webpackChunkName: "books" */ '@/views/Books.vue');
-const BookList = () => import(/* webpackChunkName: "books" */ '@/views/BookList.vue');
-const BookDetail = () => import(/* webpackChunkName: "books" */ '@/views/BookDetail.vue');
-const BookEdit = () => import(/* webpackChunkName: "books" */ '@/views/BookEdit.vue');
-const BookNew = () => import(/* webpackChunkName: "books" */ '@/views/BookNew.vue');
+const BookList = () =>
+  import(/* webpackChunkName: "books" */ '@/views/BookList.vue');
+const BookDetail = () =>
+  import(/* webpackChunkName: "books" */ '@/views/BookDetail.vue');
+const BookEdit = () =>
+  import(/* webpackChunkName: "books" */ '@/views/BookEdit.vue');
+const BookNew = () =>
+  import(/* webpackChunkName: "books" */ '@/views/BookNew.vue');
+const InfoBox = () =>
+  import(/* webpackChunkName: "info" */ '@/components/InfoBox.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -42,6 +48,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/info-box',
+    name: 'Info Box',
+    component: InfoBox
   },
   {
     path: '/:pathMatch(.*)*',

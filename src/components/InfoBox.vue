@@ -10,8 +10,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
+
+interface BoxClasses {
+  green: boolean;
+  border: boolean;
+  blue: boolean;
+}
 
 export default defineComponent({
   name: 'InfoBox',
@@ -29,7 +35,7 @@ export default defineComponent({
     }
   },
   computed: {
-    borderedBox() {
+    borderedBox(): BoxClasses {
       return {
         green: !this.clicked,
         border: !this.clicked,

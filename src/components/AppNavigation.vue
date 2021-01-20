@@ -2,7 +2,14 @@
   <ul>
     <li><router-link active-class="active" to="/books">Books</router-link></li>
     <li><router-link active-class="active" to="/about">About</router-link></li>
-    <li><router-link active-class="active" to="/books/create">New Book</router-link></li>
+    <li>
+      <router-link active-class="active" to="/books/create">
+        New Book
+      </router-link>
+    </li>
+    <li>
+      <router-link active-class="active" to="/info-box">Info Box</router-link>
+    </li>
   </ul>
 </template>
 
