@@ -1,6 +1,8 @@
 <template>
   <div>
-    <p v-if="success">Successfully created new book.</p>
+    <p v-if="success" data-test="book-form--success">
+      Successfully created new book.
+    </p>
     <form novalidate @submit.prevent="submit">
       <p>
         <label for="title">Title</label>
@@ -12,7 +14,9 @@
           @change="validateTitle"
           :class="{ 'is-invalid': errors.title }"
         />
-        <span v-if="errors.title">{{ errors.title }}</span>
+        <span v-if="errors.title" data-test="book-title--error">
+          {{ errors.title }}
+        </span>
       </p>
       <p>
         <label for="abstract">Abstract</label>
@@ -46,11 +50,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
+import { createBook } from '@/services/book.api';
 
-const required = val => val.length > 0;
-const minLength = (val, length) => val.length >= length;
+const required = (val: string | any[]) => val.length > 0;
+const minLength = (val: string | any[], length: number) => val.length >= length;
 
 export default defineComponent({
   name: 'BookNew',
@@ -70,26 +75,22 @@ export default defineComponent({
     };
   },
   computed: {
-    isInvalid() {
-      return Object.keys(this.errors).some(val => this.errors[val] !== '');
+    isInvalid(): boolean {
+      return Object.keys(this.errors).some(
+        val => (this.errors as any)[val] !== ''
+      );
     }
   },
   methods: {
     async submit() {
-      const response = await fetch('http://localhost:4730/books', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.book)
-      });
-      await response.json();
+      await createBook(this.book);
 
       this.book = {
         title: '',
         abstract: '',
         author: ''
       };
+
       this.success = true;
     },
     validateTitle() {
