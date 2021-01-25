@@ -47,3 +47,14 @@ describe('Books', () => {
     });
   });
 });
+
+describe('Books Stub', () => {
+  beforeEach(() => {
+    cy.intercept('http://localhost:4730/books', { fixture: 'books.json' });
+    cy.visit('/');
+  });
+
+  it('shows mocked books', () => {
+    cy.get('[data-test=book-list__item]').should('have.length', 2);
+  });
+});
