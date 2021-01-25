@@ -4,7 +4,7 @@
       {{ title }} <small>{{ subtitle }}</small>
     </td>
     <td>
-      <router-link :to="{ name: 'BookDetail', params: { isbn: isbn } }">
+      <router-link data-test="book__isbn" :to="{ name: 'BookDetail', params: { isbn: isbn } }">
         {{ isbn }}
       </router-link>
     </td>

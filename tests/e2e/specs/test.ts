@@ -13,6 +13,7 @@ describe('Books', () => {
       cy.visit('/');
       cy.get('[data-test=book-list__item]').as('books');
     });
+
     it('shows up in the book list', () => {
       let countBefore = 0;
 
@@ -34,6 +35,15 @@ describe('Books', () => {
       cy.get('@books').then(books =>
         expect(books.length).to.be.greaterThan(countBefore)
       );
+    });
+
+    afterEach(() => {
+      cy.get('[data-test=book__isbn]')
+        .last()
+        .then(book => book.text())
+        .then(isbn =>
+          cy.request('DELETE', `http://localhost:4730/books/${isbn}`)
+        );
     });
   });
 });
