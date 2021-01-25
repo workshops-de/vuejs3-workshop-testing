@@ -1,6 +1,7 @@
 <template>
   <table>
     <BookListItem
+      data-test="book-list__item"
       v-for="(book, index) in books"
       :key="book.isbn"
       v-bind="book"
